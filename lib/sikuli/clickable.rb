@@ -24,6 +24,32 @@ module Sikuli
       end
     end
 
+    def hover(*args)
+      case args.length
+        when 1 then hover_image(args[0])
+        when 2 then hover_point(args[0],args[1])
+        else raise ArgumentError
+      end
+    end
+
+
+    def hover_image(filename)
+      begin
+        @java_obj.hover(filename)
+      rescue NativeException => e
+            raise_exception e, filename
+      end
+    end
+
+    def hover_point(point_1,point_2)
+      begin
+        @java_obj.hover(point_1,point_2)
+      rescue NativeException => e
+                  raise_exception e,point_1,point_2
+      end
+
+    end
+
     # Public: Performs a double click on an image match or point (x, y)
     #
     # args - String representing filename of image to find and click
