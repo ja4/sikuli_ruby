@@ -58,6 +58,11 @@ module Sikuli
       @java_obj.h()
     end
 
+    # Public: get center of the region
+    def getCenter()
+      Location.new(@java_obj.getCenter())
+    end
+
     private
 
     # Private: interpret a java NativeException and raises a more descriptive
