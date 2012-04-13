@@ -16,5 +16,9 @@ module Sikuli
     def initialize
       @java_obj = org.sikuli.script::Screen.new()
     end
+
+    def capture
+      @java_obj.capture()
+    end
   end
 end
