@@ -29,5 +29,11 @@ module Sikuli
     def window
       Region.new(@java_obj.window())
     end
+
+    #Public: close the App
+    #Returns return int
+    def close()
+      @java_obj.close()
+    end
   end
 end
