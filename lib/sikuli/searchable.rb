@@ -117,6 +117,20 @@ module Sikuli
       end
     end
 
+    #public: wait until target vanishes
+    #Input filename - filename or text string,time and similarity
+    #return true or false
+
+    def waitVanish(filename,time=2,similarity=0.9)
+      begin
+         pattern = build_pattern(filename,similarity)
+         match = @java_obj.waitVanish(pattern, time)
+         match
+      rescue NativeException => e
+              raise_exception e, filename
+      end
+    end
+
     private
 
     # Private: builds a java Pattern to check
@@ -128,7 +142,12 @@ module Sikuli
     #
     # Returns a org.sikuli.script::Pattern object to match against
     def build_pattern(filename, similarity)
-      org.sikuli.script::Pattern.new(filename).similar(similarity)
+
+      if(filename.count('/')>0)   #filename is path
+        org.sikuli.script::Pattern.new(filename).similar(similarity)
+      else #just a string character
+        filename
+      end
     end
   end
 end
